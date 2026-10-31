@@ -1,6 +1,3 @@
-# FILE: deepface_ver/ui/name_select.py
-
-
 import pygame
 
 from ..core import highscore
@@ -16,7 +13,7 @@ class NameSelector:
         self.input_mode: bool = False
         self.done: bool = False
         self.cancelled: bool = False
-        # 追加: 変換中の文字列を保持する変数
+        # IMEで確定前の文字列を、確定済みの名前と分けて表示する。
         self.editing_text: str = ""
 
     def start(self) -> None:
@@ -93,12 +90,10 @@ class NameSelector:
                         self.selected_index = min(len(self.recent) - 1, self.selected_index + 1)
                 return
 
-        # 追加: IME変換中のイベント処理
         elif event.type == pygame.TEXTEDITING:
             if self.input_mode:
                 self.editing_text = event.text
 
-        # 追加: IME確定後、または通常の文字入力イベント処理
         elif event.type == pygame.TEXTINPUT:
             if self.input_mode:
                 self.name = self.name[: self.cursor_pos] + event.text + self.name[self.cursor_pos :]

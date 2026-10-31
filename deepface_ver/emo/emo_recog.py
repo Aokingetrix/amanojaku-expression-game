@@ -71,8 +71,8 @@ class EmotionRecognizer_gpt:
 
     ゲームループ側は submit_frame() でフレームを渡し、
     get_latest_result() で最新の認識結果を即座に（ブロックせずに）取得する。
-    バックグラウンドスレッドが DeepFace.analyze を実行するため、
-    ゲームループの FPS に影響しない。
+    DeepFace.analyze はバックグラウンドで実行し、
+    ゲームループは処理の完了を待たずに最新の結果を使う。
     """
 
     EMOTION_MERGE_MAP = {

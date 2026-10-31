@@ -201,12 +201,11 @@ def main(options: RuntimeOptions | None = None):
     current_bgm = None
     prev_state = None
 
-    # 追加: ハイスコアキャッシュ用変数
     cached_best_all = []
     cached_best_today = []
 
     while running:
-        # 変数を初期化。物理キー依存の変数を廃止し、意味（cancel）で統一。
+        # このフレームで発生した入力を集める。
         s_key_pressed = cancel_key_pressed = e_key_pressed = n_key_pressed = h_key_pressed = (
             r_key_pressed
         ) = False
@@ -242,7 +241,6 @@ def main(options: RuntimeOptions | None = None):
                     if not selector.active:
                         sounds["select"].play()
 
-                # K_b および K_q は文字入力の邪魔になるため、システム操作からは完全に削除
                 if event.key == K_e:
                     e_key_pressed = True
                 if event.key == K_n:
@@ -284,7 +282,7 @@ def main(options: RuntimeOptions | None = None):
             selector.cancelled = False
             selector.active = False
 
-        # 変更: ハイスコアの計算とデータ取得をタイトル・終了画面の遷移時のみ実行
+        # ランキングは画面遷移時に計算し、描画中はキャッシュを使う。
         if prev_state != state:
             if state == GameState.TITLE:
                 try:
@@ -360,7 +358,6 @@ def main(options: RuntimeOptions | None = None):
                     smoothed_emotion = count.most_common(1)[0][0]
 
         if not developer_mode and not selector.active:
-            # 物理キー依存の変数を渡しやめ、意味的なフラグ (cancel_key_pressed) を渡す
             game_manager.update(
                 smoothed_emotion,
                 s_key_pressed,
@@ -417,7 +414,6 @@ def main(options: RuntimeOptions | None = None):
             )
         elif state == GameState.TITLE:
             drawing.draw_title_screen(screen, backgrounds["title"], floating_images)
-            # 追加: キャッシュしたハイスコアを描画
             drawing.draw_title_highscores(screen, SCREEN_WIDTH, cached_best_all, cached_best_today)
         elif state == GameState.SKIP_SELECTION:
             drawing.draw_skip_selection_screen(
@@ -461,7 +457,6 @@ def main(options: RuntimeOptions | None = None):
                 drawing.draw_finish_screen(
                     screen, backgrounds["finish"], game_manager, SCREEN_WIDTH, SCREEN_HEIGHT
                 )
-                # 追加: 終了画面の右側に今回の順位と自己ベストを描画
                 drawing.draw_finish_highscores(screen, SCREEN_WIDTH, game_manager)
 
             if state != GameState.GAME_FINISH:

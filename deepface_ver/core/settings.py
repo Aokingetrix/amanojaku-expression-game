@@ -52,7 +52,7 @@ for p in FONT_CANDIDATES:
 if not FONT_PATH:
     print("警告: 利用可能なフォントが見つかりません。デフォルトフォントを使用します。")
 
-# === システム定数（絶対に削除しない） ===
+# === 表示と認識の設定 ===
 TILE_SIZE = 40
 RECOGNITION_HISTORY_SIZE = 3
 
@@ -130,7 +130,7 @@ def theme_text(key, default):
     return THEME_TEXT.get(key, default)
 
 
-# === 追加機能: 動的フォント＆スタイル管理 ===
+# === フォントとスコア表示 ===
 
 # Settings Spine Font 用のパス（存在しなければ通常のフォントにフォールバック）
 SPINE_FONT_PATH = asset_path("fonts", "spine_font.ttf")
