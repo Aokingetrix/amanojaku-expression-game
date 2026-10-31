@@ -53,6 +53,7 @@ Python・Pygame・OpenCV・DeepFaceを使用しています。
 ## 制作
 
 EEIC後期実験で個人制作し、文化祭でも公開しました。企画から実装・動作確認まで制作全体を担当し、開発にはGeminiとCodexを全面的に使用しました。
+インターンでの提出にあたり、画像やBGM等を一時的に著作権の心配がないものに変えています。
 
 制作：[Aokingetrix](https://github.com/Aokingetrix)
 
