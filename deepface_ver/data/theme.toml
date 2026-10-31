@@ -1,0 +1,50 @@
+schema_version = 1
+id = "default"
+display_name = "あまのじゃくゲーム"
+
+[text]
+title = "あまのじゃくゲーム"
+start = "[S] スタート!"
+skip_question = "遊び方の説明を見ますか？"
+skip_yes = "[S] はい"
+skip_no = "[E] スキップ"
+emotion_map_title = "対応関係"
+emotion_map_description = "左のあまのじゃくの表情と、右の人間の顔が対応するよ"
+name_select_title = "プレイヤー名を選択"
+countdown_start = "スタート！"
+finish_title = "ゲーム終了"
+instruction_lines = [
+  "こんにちは。わたしは「あまのじゃく」のこども。",
+  " 立派な「あまのじゃく」になるため、日々奮闘中。",
+  "そこのあなた、「あまのじゃく」の見本を教えてくれない？",
+  "わたしの顔（ニコニコ、ムカムカ、シクシク、ビックリ）と、ちがう顔をするの。",
+  "「シーン（無感情）」や、「顔が映らない」と、",
+  "ライフが減っちゃうから気をつけて！",
+]
+
+[images]
+clock = "public/icons/clock.png"
+heart = "public/icons/heart.png"
+question = "public/icons/question.png"
+no_exp = "public/emotions/neutral.png"
+emotion_happy = "public/emotions/happy.png"
+emotion_sad = "public/emotions/sad.png"
+emotion_angry = "public/emotions/angry.png"
+emotion_surprise = "public/emotions/surprise.png"
+emotion_neutral = "public/emotions/neutral.png"
+human_happy = "human_faces/happy_human.png"
+human_sad = "human_faces/sad_human.png"
+human_angry = "human_faces/angry_human.png"
+human_surprise = "human_faces/surprise_human.png"
+human_neutral = "human_faces/no_exp_human.png"
+
+[bgm]
+title = "public/sounds/bgm_title.wav"
+play = "public/sounds/bgm_play.wav"
+finish = "public/sounds/bgm_finish.wav"
+
+[se]
+select = "sounds/se_select.mp3"
+count = "sounds/se_count.mp3"
+success = "sounds/se_success.mp3"
+fail = "sounds/se_fail.mp3"

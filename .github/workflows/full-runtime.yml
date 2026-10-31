@@ -1,0 +1,39 @@
+name: Full Runtime Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/full-runtime.yml'
+      - 'deepface_ver/requirements.txt'
+      - 'deepface_ver/**/*.py'
+      - 'deepface_ver/data/**'
+      - 'requirements-dev.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  imports:
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -r deepface_ver/requirements.txt
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pip check
+      - run: python -c "import cv2, deepface, pygame, tensorflow; print(tensorflow.__version__)"
+      - run: python -m deepface_ver.scripts.main --help
+      - run: python -m pytest
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy

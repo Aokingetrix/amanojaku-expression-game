@@ -1,0 +1,9 @@
+# Store source text consistently across Windows and Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ttf binary
+*.mp3 binary
+*.ogg binary
+*.wav binary

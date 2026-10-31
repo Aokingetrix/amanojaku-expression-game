@@ -1,0 +1,14 @@
+# Stable Windows/Linux requirements for this game
+# Install with: pip install -r requirements.txt
+# Recommended Python: 3.11.x
+# Using OpenCV Haar for face detection and legacy Keras compatibility
+
+pygame==2.6.1
+opencv-python==4.9.0.80
+deepface==0.0.92
+tensorflow-cpu==2.15.1
+tf-keras==2.15.0
+numpy==1.26.4
+pandas==2.2.3
+gdown==5.2.0
+pillow==10.4.0

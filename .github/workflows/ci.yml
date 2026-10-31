@@ -1,0 +1,33 @@
+name: Fast CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    timeout-minutes: 15
+    runs-on: ${{ matrix.os }}
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt pygame==2.6.1
+      - run: python -m pytest
+      - run: ruff check deepface_ver/application.py deepface_ver/core deepface_ver/scripts deepface_ver/tests deepface_ver/ui tools
+      - run: ruff format --check deepface_ver/application.py deepface_ver/core deepface_ver/scripts deepface_ver/tests deepface_ver/ui tools
+      - run: python -m tools.render_preview
